@@ -1,0 +1,31 @@
+{
+  "name": "oauth2.0-with-google",
+  "version": "1.0.0",
+  "description": "",
+
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wajahat883/OAuth2.0-with-Google.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Wajahat883/OAuth2.0-with-Google/issues"
+  },
+  "homepage": "https://github.com/Wajahat883/OAuth2.0-with-Google#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}
