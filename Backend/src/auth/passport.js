@@ -1,28 +1,28 @@
-import e from "express";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
- passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:4000/api/auth/google/callback",
     },
-    async (accessToken, refreshToken, profile, done) => {
-        try {
-            // Here, you would typically find or create a user in your database
-            const user = {
-              
-                id:profile.id,
-                name:profile.displayName,
-                email:profile.emails?.[0]?.value,
-                picture:profile.photos?.[0]?.value,
-                provider:'google'
+    function (accessToken, refreshToken, profile, done) {
+      const user = {
+        id: profile.id,
+        name: profile.displayName,
+        email: profile.emails[0].value,
+      };
+      return done(null, user);
+    }
+  )
+);
 
-             };
-             return done(null, user);
-            } catch (err) {
-                return done(err, null);
-            }
-        })
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((obj, done) => done(null, obj));
 
- )
- export default passport;
+export default passport;
